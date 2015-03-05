@@ -100,7 +100,8 @@ get_header();
                         'hide_empty' => false
                     ));
                     foreach ($witnesses as $witness) {
-                        if ($witness_meta = get_option("taxonomy_" . $witness->term_id)) {
+                        $witness_meta = get_option("taxonomy_" . $witness->term_id);
+                        if (!empty($witness_meta["letter"])) {
                             $first_letter = strtoupper($witness_meta[letter]);
                         } else {
                             $split = explode(" ", $witness->name);
@@ -133,11 +134,11 @@ get_header();
                 document.location = UpdateQueryString("hdate", date);
             }
         });
-    
+
 		$('#mobile-date-form #hdate').combodate();
 
     });
-	
+
     // Interaction for by-letter nav
     $(".evidence-nav-letter:not(.disabled)").on("click touchend", function() {
         clickedOn = $(this).attr("id").replace("-filter", "");
