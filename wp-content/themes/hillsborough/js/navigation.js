@@ -80,3 +80,51 @@ $(document).on("click", "#popup .close a, #blackout", function(e) {
     });
 });
 
+/*  Sub-menu behaviour */
+
+/*$( document ).ready(function() {
+
+$('#menu-main-nav .sub-menu').hide(); //Hide children by default
+    
+$('#menu-main-nav li a').click(function(event){
+    if ($(this).next('ul.sub-menu').children().length !== 0) {     
+        event.preventDefault();
+    }
+$(this).siblings('.sub-menu').slideToggle('fast');
+});
+});*/
+
+
+$( document ).ready(function() {
+$('.sub-menu').hide();
+$("li:has(ul)").click(function(){
+  $("ul",this).slideDown();
+});
+
+$('#menu-main-nav ul li ul.sub-menu li a').click(function(e){
+  if ($(this).attr('class') != 'active'){
+    $('#menu-main-nav ul li a').removeClass('active');
+    $(this).addClass('active');
+  }
+});
+
+$('a').filter(function(){
+  return this.href === document.location.href;
+}).addClass('active');
+
+$("ul.sub-menu > li > a").each(function () {
+  var currentURL = document.location.href;
+  var thisURL = $(this).attr("href");
+  if (currentURL.indexOf(thisURL) != -1) {
+    $(this).parents("ul.sub-menu").css('display', 'block');
+  }
+});
+
+$('#menu-main-nav > ul > li > a').each(function(){
+  var currURL = document.location.href;
+  var myHref= $(this).attr('href');
+  if (currURL.match(myHref)) {
+    $(this).parent().find("ul.sub-menu").css('display', 'block');
+  }
+});
+}); 
