@@ -82,19 +82,6 @@ $(document).on("click", "#popup .close a, #blackout", function(e) {
 
 /*  Sub-menu behaviour */
 
-/*$( document ).ready(function() {
-
-$('#menu-main-nav .sub-menu').hide(); //Hide children by default
-    
-$('#menu-main-nav li a').click(function(event){
-    if ($(this).next('ul.sub-menu').children().length !== 0) {     
-        event.preventDefault();
-    }
-$(this).siblings('.sub-menu').slideToggle('fast');
-});
-});*/
-
-
 $( document ).ready(function() {
 $('.sub-menu').hide();
 $("li:has(ul)").click(function(){
