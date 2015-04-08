@@ -84,7 +84,7 @@ $(document).on("click", "#popup .close a, #blackout", function(e) {
 
 $( document ).ready(function() {
 $('.sub-menu').hide();
-$("li:has(ul)").click(function(){
+$("li").has("ul.sub-menu").click(function(){
   $("ul",this).slideDown();
 });
 
