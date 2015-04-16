@@ -174,6 +174,11 @@ footer.site-footer {
     background-color: #666;
     color: #fff;
 }
+
+#secondary ul.sub-menu {
+    margin: 0 0 0 20px;
+}
+
 .menu-item-home {
     display: none;
 }
