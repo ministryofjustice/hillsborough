@@ -45,7 +45,9 @@ foreach ($hearings->posts as $hearing) {
                     <?php echo date('D j<\b\\r>M Y', strtotime(substr(get_the_title(), 0, -10))); ?>
                 </span>
             </h1>
-            <h3><?php echo substr(get_the_title(), -10); ?></h3>
+            <h3>
+                <?php echo substr(get_the_title(), -10); ?> <span class="names">(<?php echo get_post_meta($post->ID, 'hearing_names', true); ?>)</span>    
+            </h3>
         </div>
     </header><!-- .entry-header -->
 
