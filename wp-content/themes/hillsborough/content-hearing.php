@@ -46,7 +46,11 @@ foreach ($hearings->posts as $hearing) {
                 </span>
             </h1>
             <h3>
-                <?php echo substr(get_the_title(), -10); ?> <span class="names">(<?php echo get_post_meta($post->ID, 'hearing_names', true); ?>)</span>    
+                <?php echo substr(get_the_title(), -10); ?> 
+                <?php if (get_post_meta($post->ID, 'hearing_names', true)) { ?>
+                <span class="names">(<?php echo get_post_meta($post->ID, 'hearing_names', true); ?>)</span>
+                <?php } else { ?>
+                <?php } ?>  
             </h3>
         </div>
     </header><!-- .entry-header -->
