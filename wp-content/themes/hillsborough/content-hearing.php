@@ -48,7 +48,7 @@ foreach ($hearings->posts as $hearing) {
             <h3>
                 <?php echo substr(get_the_title(), -10); ?> 
                 <?php if (get_post_meta($post->ID, 'hearing_names', true)) { ?>
-                <span class="names">(<?php echo get_post_meta($post->ID, 'hearing_names', true); ?>)</span>
+                <span class="names">Evidence in relation to the death of: <?php echo get_post_meta($post->ID, 'hearing_names', true); ?></span>
                 <?php } else { ?>
                 <?php } ?>  
             </h3>
