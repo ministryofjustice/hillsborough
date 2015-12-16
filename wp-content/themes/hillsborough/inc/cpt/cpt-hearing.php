@@ -97,6 +97,11 @@ function hillsborough_add_hearing_meta_boxes() {
                 'label' => 'Transcript (txt)',
                 'type' => 'upload',
             ),
+            array(
+                'id' => 'hearing_names',
+                'label' => 'Names of the deceased',
+                'type' => 'text',
+            ),
         )
     );
     ot_register_meta_box($hearing_metabox_details);
