@@ -99,10 +99,11 @@ get_header();
                     $witnesses = get_terms('witness', array(
                         'hide_empty' => false
                     ));
+                    $witnesses_formatted = '';
                     foreach ($witnesses as $witness) {
                         $witness_meta = get_option("taxonomy_" . $witness->term_id);
                         if (!empty($witness_meta["letter"])) {
-                            $first_letter = strtoupper($witness_meta[letter]);
+                            $first_letter = strtoupper($witness_meta['letter']);
                         } else {
                             $split = explode(" ", $witness->name);
                             $first_letter = strtoupper(substr($split[count($split) - 1], 0, 1));
