@@ -7,6 +7,7 @@
 *.swp
 Thumbs.db
 .idea
+sitemap.xml*
 
 # WordPress core
 /wp-config.php
