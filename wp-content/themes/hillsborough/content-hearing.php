@@ -7,7 +7,7 @@
 <?php
 // Create query to pull in all hearings in hearing order (not order hearings were created,
 // just in case they're created out of sequence
-$hearings = new WP_Query(
+$hearings_results = new WP_Query(
         array(
     'post_type' => 'hearing',
     'orderby' => 'meta_value title',
@@ -19,13 +19,13 @@ $hearings = new WP_Query(
 );
 
 $x = 0;
-foreach ($hearings->posts as $hearing) {
+foreach ($hearings_results->posts as $hearing) {
     if ($hearing->ID == $post->ID) {
         $hearing_session = get_post_meta($hearing->ID, 'hearing_session', true);
-        $prev_link = get_permalink($hearings->posts[$x - 1]->ID);
-        $prev_date = get_the_title($hearings->posts[$x - 1]->ID);
-        $next_link = get_permalink($hearings->posts[$x + 1]->ID);
-        $next_date = get_the_title($hearings->posts[$x + 1]->ID);
+        $prev_link = get_permalink($hearings_results->posts[ $x - 1]->ID);
+        $prev_date = get_the_title($hearings_results->posts[ $x - 1]->ID);
+        $next_link = get_permalink($hearings_results->posts[ $x + 1]->ID);
+        $next_date = get_the_title($hearings_results->posts[ $x + 1]->ID);
     }
     $x++;
 }
