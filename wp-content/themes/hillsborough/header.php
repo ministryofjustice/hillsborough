@@ -64,7 +64,7 @@
                                 echo "<li class='breadcrumb-child'>" . get_the_title($ancestor) . "</li>";
                             }
                             if (is_archive()) {
-                                echo "<li class='breadcrumb-child'><a href='" . get_post_type_archive_link($wp_query->query[post_type]) . "'>" . post_type_archive_title('', false) . "</a></li> ";
+                                echo "<li class='breadcrumb-child'><a href='" . get_post_type_archive_link($wp_query->query['post_type']) . "'>" . post_type_archive_title('', false) . "</a></li> ";
                                 if (is_post_type_archive('evidence') && get_query_var('witness')) {
                                     $witness = get_term_by('slug', get_query_var("witness"), "witness");
                                     echo "<li class='breadcrumb-child'><a href='" . get_permalink(get_page_by_title('evidence')) . "?witness=" . get_query_var('witness') . "'> Witness: " . $witness->name . "</a></li>";

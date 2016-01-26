@@ -51,18 +51,21 @@ $(document).on("click", '#site-navigation h1', function(e) {
 });
 
 jQuery(document).ready(function($) {
-    $("body").swipe({
-        swipe: function(event, direction, distance, duration, fingerCount) {
-            if (direction == "right") {
-                $('#secondary').addClass('toggled');
-                $('#site-navigation h1').first().addClass('toggled');
-            } else if (direction == "left") {
-                $('#secondary').removeClass('toggled');
-                $('#site-navigation h1').first().removeClass('toggled');
-            }
-        },
-        allowPageScroll: "vertical"
-    });
+    var isTouchDevice = 'ontouchstart' in document.documentElement;
+    if (isTouchDevice) {
+        $("body").swipe({
+            swipe: function(event, direction, distance, duration, fingerCount) {
+                if (direction == "right") {
+                    $('#secondary').addClass('toggled');
+                    $('#site-navigation h1').first().addClass('toggled');
+                } else if (direction == "left") {
+                    $('#secondary').removeClass('toggled');
+                    $('#site-navigation h1').first().removeClass('toggled');
+                }
+            },
+            allowPageScroll: "vertical"
+        });
+    }
 });
 
 // Popup for video - enabled site wide so can be used anywhere
