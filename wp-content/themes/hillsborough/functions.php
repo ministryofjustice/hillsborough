@@ -172,6 +172,11 @@ add_action('admin_enqueue_scripts', 'ajax_load_scripts');
 require get_template_directory() . '/inc/template-tags.php';
 
 /**
+ * Template redirect rules (hooks to "template_redirect")
+ */
+require get_template_directory() . '/inc/template-redirects.php';
+
+/**
  * Custom functions that act independently of the theme templates.
  */
 require get_template_directory() . '/inc/extras.php';
