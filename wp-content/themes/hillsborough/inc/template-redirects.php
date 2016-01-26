@@ -1,7 +1,10 @@
 <?php
 
 function hillsborough_kill_posts() {
-    if (is_single() && get_post_type() == 'post') {
+    $isPost = is_single() && get_post_type() == 'post';
+    $isCategory = is_category();
+
+    if ($isPost || $isCategory) {
         header('HTTP/1.1 410 Gone');
         ?>
 
