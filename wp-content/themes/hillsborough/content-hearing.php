@@ -134,7 +134,7 @@ foreach ($hearings_results->posts as $hearing) {
                             $evidence_url = get_post_meta($evidence_item->ID, 'evidence_url', true);
                             $evidence_video = get_post_meta($evidence_item->ID, 'evidence_video', true);
                             if ($evidence_video) {
-                                echo "<li><a href='' class='popup-video' data-video-id='" . $evidence_video . "'>" . get_the_title($evidence_item->ID) . " (video)</a></li";
+                                echo "<li><a href='' class='popup-video' data-video-id='" . $evidence_video . "'>" . get_the_title($evidence_item->ID) . " (video)</a></li>";
                             } elseif ($evidence_url) {
                                 $evidence_id = get_attachment_id_from_src($evidence_url);
                                 $evidence_size = round(filesize(get_attached_file($evidence_id)) / 1024);
