@@ -24,7 +24,9 @@ get_header();
             'post_type' => 'hearing',
             's' => $s,
         ));
-        relevanssi_do_query($hearings_results);
+        if (function_exists('relevanssi_do_query')) {
+            relevanssi_do_query($hearings_results);
+        }
         ?>
         <?php if ($hearings_results->have_posts()) : ?>
             <?php //while ($hearings_results->have_posts()) : $hearings_results->the_post(); ?>
@@ -84,20 +86,15 @@ get_header();
 
         <h2>Evidence</h2>
         <?php
-        /*$evidence_results = new WP_Query(array(
-            'post_type' => 'evidence',
-            's' => $s
-        ));
-        relevanssi_do_query($evidence_results);*/
 
         query_posts(array(
             'post_type' => 'evidence',
             's' => $s
         ));
-        relevanssi_do_query($wp_query);
-
+        if (function_exists('relevanssi_do_query')) {
+            relevanssi_do_query($wp_query);
+        }
         get_template_part('list-evidence');
-
         wp_reset_query();
 
         ?>
