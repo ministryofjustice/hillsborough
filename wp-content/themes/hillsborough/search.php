@@ -84,7 +84,7 @@ get_header();
         <?php endif; ?>
 
 
-        <h2>Evidence</h2>
+        <h2>Relevant Evidence</h2>
         <?php
 
         query_posts(array(
