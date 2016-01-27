@@ -44,26 +44,67 @@ get_header();
             <h4>Results</h4>
             <div class="search-results">
                 <?php if (have_posts()) { ?>
+                    <?php $prev_hearing_ID = false; ?>
                     <?php while (have_posts()) : the_post(); ?>
-
                         <?php
                         $evidence_url = get_post_meta($post->ID, 'evidence_url', true);
                         if ($evidence_url) {
                             $evidence_id = get_attachment_id_from_src($evidence_url);
                             $evidence_size = round(filesize(get_attached_file($evidence_id)) / 1024);
+
+                            $hearing = new WP_Query(array(
+                                'post_type' => 'hearing',
+                                'meta_query' => array(
+                                    array(
+                                        'key' => 'hearing_date',
+                                        'value' => get_post_meta($post->ID, 'evidence_hearing_date', true),
+                                    ),
+                                    array(
+                                        'key' => 'hearing_session',
+                                        'value' => get_post_meta($post->ID, 'evidence_hearing_session', true),
+                                    ),
+                                ),
+                            ));
+
+                            if ($hearing->have_posts()) {
+                                $hearing = $hearing->posts[0];
+                                $hearing_date = get_post_meta($hearing->ID, 'hearing_date', true);
+                                $hearing_timestamp = strtotime($hearing_date);
+                                $hearing_session = get_post_meta($hearing->ID, 'hearing_session', true);
+                                $hearing_url = get_the_permalink($hearing->ID);
+                            } else {
+                                $hearing = false;
+                            }
+
                             ?>
                             <div class="results-line">
                                 <div class="col-3">
-                                    <span class="long-date">
-                                        <?php echo ($last_date != get_post_meta($post->ID, "evidence_hearing_date", true) ? date('l j F Y', strtotime(get_post_meta($post->ID, "evidence_hearing_date", true))) : "&nbsp;"); ?>
-                                    </span>
-                                    <span class="short-date">
-                                        <?php echo ($last_date != get_post_meta($post->ID, "evidence_hearing_date", true) ? date('D j<\b\\r>M Y', strtotime(get_post_meta($post->ID, "evidence_hearing_date", true))) : "&nbsp;"); ?>
-                                    </span>
+                                    <?php if ($hearing && $hearing->ID !== $prev_hearing_ID): ?>
+                                        <span class="long-date">
+                                            <a href="<?php echo $hearing_url; ?>">
+                                                <?php echo date('l j F Y', $hearing_timestamp); ?>
+                                                <?php echo strtoupper($hearing_session); ?>
+                                            </a>
+                                        </span>
+                                        <span class="short-date">
+                                            <a href="<?php echo $hearing_url; ?>">
+                                                <?php echo date('D j<\b\\r>M Y', $hearing_timestamp); ?>
+                                                <?php echo strtoupper($hearing_session); ?>
+                                            </a>
+                                        </span>
+                                    <?php else: // For evidence which doesn't have a hearing date assigned. ?>
+                                        &nbsp;
+                                    <?php endif; ?>
                                 </div>
                                 <div><?php echo "<a href='" . $evidence_url . "' target='_blank'>" . get_the_title() . " (" . substr($evidence_url, -3) . ", " . $evidence_size . "kb)</a>"; ?></div>
                             </div>
-                            <?php $last_date = get_post_meta($post->ID, "evidence_hearing_date", true); ?>
+                            <?php
+                            if ($hearing) {
+                                $prev_hearing_ID = $hearing->ID;
+                            } else {
+                                $prev_hearing_ID = false;
+                            }
+                            ?>
                         <?php } ?>
                     <?php endwhile; ?>
                 <?php } else { ?>
