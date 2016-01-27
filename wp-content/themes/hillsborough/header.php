@@ -71,6 +71,9 @@
                                 } elseif (is_post_type_archive('evidence') && get_query_var('hdate')) {
                                     echo "<li class='breadcrumb-child'><a href='" . get_permalink(get_page_by_title('evidence')) . "?hdate=" . get_query_var('hdate') . "'> Date: " . date('l j F Y', strtotime($_GET['hdate'])) . "</a></li>";
                                 }
+                            }
+                            else if (is_search()) {
+                                echo "<li class='breadcrumb-child'>Search Results for: " . get_search_query() . "</li>";
                             } else {
                                 if (is_singular('hearing')) {
                                     echo "<li class='breadcrumb-child'><a href='" . get_permalink(get_page_by_title('hearings')) . "'>Hearings</a> </li>";
