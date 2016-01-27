@@ -7,7 +7,7 @@
 get_header();
 ?>
 <?php get_sidebar(); ?>
-<?php $s = $_GET['s']; ?>
+<?php $s = get_search_query(); ?>
 
 <section id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -34,7 +34,7 @@ get_header();
                 <?php
 
                 // Check var for to see if month/year has changed
-                $cur_day = $cur_month = $cur_year = null;
+                $cur_day = null;
                 // Toggle var for applying row highlight
                 $highlight = true;
 
@@ -47,18 +47,6 @@ get_header();
                         $next_post = $hearings_results->posts[ $hearings_results->current_post + 1];
                     } else {
                         $next_post = false;
-                    }
-                    // If the month/year has changed, print a new month/year heading
-                    if (($cur_month != date("F", strtotime(get_post_meta($post->ID, 'hearing_date', true)))) || ($cur_year != date("Y", strtotime(get_post_meta($post->ID, 'hearing_date', true))))) {
-                        if ($cur_month != null)
-                            echo "</div></div>";
-                        $cur_month = date("F", strtotime(get_post_meta($post->ID, 'hearing_date', true)));
-                        $cur_year = date("Y", strtotime(get_post_meta($post->ID, 'hearing_date', true)));
-                        echo "<div class='hearing-month'>";
-                        echo "<h3>" . $cur_month . " " . $cur_year . "</h3>";
-                        echo "<div>";
-                        // Make first entry for each month have a highlight
-                        $highlight = true;
                     }
 
                     $session = get_post_meta($post->ID, "hearing_session", true);
@@ -86,7 +74,6 @@ get_header();
 
                     $highlight = !$highlight;
                 }
-                echo "</div></div>";
                 ?>
 
             <?php //endwhile; ?>
@@ -119,6 +106,7 @@ get_header();
             'post_type' => 'document',
             's' => $s
         ));
+        relevanssi_do_query($document_results);
         ?>
         <?php if ($document_results->have_posts()) : ?>
             <?php while ($document_results->have_posts()) : $document_results->the_post(); ?>                        
