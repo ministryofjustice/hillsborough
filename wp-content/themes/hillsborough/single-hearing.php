@@ -5,7 +5,7 @@
  * @package hillsborough
  */
 
-get_header(); query_posts( $query_string . '&post_status=publish' ); ?>
+get_header(); ?>
 <?php get_sidebar(); ?>
 
 	<div id="primary" class="content-area">

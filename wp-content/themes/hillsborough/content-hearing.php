@@ -56,17 +56,6 @@ foreach ($hearings_results->posts as $hearing) {
     </header><!-- .entry-header -->
 
     <div class="entry-content">
-        <?php if (false) { // Remove video option (for now?) ?>
-            <div class="video-nav">
-                <div class="video">
-                    <?php if (get_post_meta($post->ID, 'hearing_video', true)) { ?>
-                        <iframe width="512" height="288" src="//www.youtube.com/embed/<?php echo get_post_meta($post->ID, 'hearing_video', true); ?>?wmode=transparent" frameborder="0" allowfullscreen></iframe>
-                    <?php } else { ?>
-                        <h4>No video available</h2>
-                        <?php } ?>
-                </div>
-            </div>
-        <?php } ?>
         <div class="links-table">
             <div class="col-3">
                 <h4>Witnesses</h4>
@@ -110,42 +99,29 @@ foreach ($hearings_results->posts as $hearing) {
             </div>
             <div class="col-3">
                 <h4>Evidence</h4>
-                <ul>
-                    <?php
-                    $evidence = new WP_Query(
-                            array(
-                        'post_type' => 'evidence',
-                        'meta_query' => array(
-                            array(
-                                'key' => 'evidence_hearing_date',
-                                'value' => get_post_meta($post->ID, 'hearing_date', true)
-                            ),
-                            array(
-                                'key' => 'evidence_hearing_session',
-                                'value' => get_post_meta($post->ID, 'hearing_session', true)
-                            )
+                <?php
+
+                query_posts(array(
+                    'post_type' => 'evidence',
+                    'meta_query' => array(
+                        array(
+                            'key' => 'evidence_hearing_date',
+                            'value' => get_post_meta($post->ID, 'hearing_date', true)
                         ),
-                        'orderby' => 'menu_order',
-                        'order' => 'ASC'
-                            )
-                    );
-                    if ($evidence->have_posts()) {
-                        foreach ($evidence->posts as $evidence_item) {
-                            $evidence_url = get_post_meta($evidence_item->ID, 'evidence_url', true);
-                            $evidence_video = get_post_meta($evidence_item->ID, 'evidence_video', true);
-                            if ($evidence_video) {
-                                echo "<li><a href='' class='popup-video' data-video-id='" . $evidence_video . "'>" . get_the_title($evidence_item->ID) . " (video)</a></li>";
-                            } elseif ($evidence_url) {
-                                $evidence_id = get_attachment_id_from_src($evidence_url);
-                                $evidence_size = round(filesize(get_attached_file($evidence_id)) / 1024);
-                                echo "<li><a href='" . $evidence_url . "' target='_blank'>" . get_the_title($evidence_item->ID) . " (" . substr($evidence_url, -3) . ", " . $evidence_size . "kb)</a></li>";
-                            }
-                        }
-                    } else {
-                        echo "<li>No evidence available for this hearing</li>";
-                    }
-                    ?>
-                </ul>
+                        array(
+                            'key' => 'evidence_hearing_session',
+                            'value' => get_post_meta($post->ID, 'hearing_session', true)
+                        )
+                    ),
+                    'orderby' => 'menu_order',
+                    'order' => 'ASC'
+                ));
+
+                get_template_part('list-evidence');
+
+                wp_reset_query();
+
+                ?>
             </div>
         </div>
     </div><!-- .entry-content -->

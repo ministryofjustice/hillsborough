@@ -18,7 +18,7 @@ get_header();
 
         <?php /* Start the Loop */ ?>
 
-        <h2>Hearings</h2>
+        <h2>Relevant Hearings</h2>
         <?php
         $hearings_results = new WP_Query(array(
             'post_type' => 'hearing',
@@ -66,8 +66,8 @@ get_header();
                         ?>
                         <div class='hearing-entry<?php echo ($highlight ? " shaded" : ""); ?>'>
                             <span class='hearing-date'><?php echo date('l j F Y', strtotime(get_post_meta($post->ID, 'hearing_date', true))); ?></span>
-                            <span class='session-link'><?php if ($hearing_am) { ?><a href="<?php echo $hearing_am; ?>">AM Session</a><?php } else { ?>No AM session<?php } ?></span>
-                            <span class='session-link'><?php if ($hearing_pm) { ?><a href="<?php echo $hearing_pm; ?>">PM Session</a><?php } else { ?>No PM session<?php } ?></span>
+                            <span class='session-link'><?php if ($hearing_am) { ?><a href="<?php echo $hearing_am; ?>">AM Session</a><?php } else { ?>–<?php } ?></span>
+                            <span class='session-link'><?php if ($hearing_pm) { ?><a href="<?php echo $hearing_pm; ?>">PM Session</a><?php } else { ?>–<?php } ?></span>
                         </div>
                         <?php
                     }
@@ -84,39 +84,23 @@ get_header();
 
         <h2>Evidence</h2>
         <?php
-        $evidence_results = new WP_Query(array(
+        /*$evidence_results = new WP_Query(array(
             'post_type' => 'evidence',
             's' => $s
         ));
-        relevanssi_do_query($evidence_results);
-        ?>
-        <?php if ($evidence_results->have_posts()) : ?>
-            <?php while ($evidence_results->have_posts()) : $evidence_results->the_post(); ?>                        
+        relevanssi_do_query($evidence_results);*/
 
-                <?php get_template_part('content', 'search'); ?>
-
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p class='no-results'>No matching evidence found.</p>
-        <?php endif; ?>
-
-        <h2>Documents</h2>
-        <?php
-        $document_results = new WP_Query(array(
-            'post_type' => 'document',
+        query_posts(array(
+            'post_type' => 'evidence',
             's' => $s
         ));
-        relevanssi_do_query($document_results);
+        relevanssi_do_query($wp_query);
+
+        get_template_part('list-evidence');
+
+        wp_reset_query();
+
         ?>
-        <?php if ($document_results->have_posts()) : ?>
-            <?php while ($document_results->have_posts()) : $document_results->the_post(); ?>                        
-
-                <?php get_template_part('content', 'search'); ?>
-
-            <?php endwhile; ?>       
-        <?php else: ?>
-            <p class='no-results'>No matching documents found.</p>
-        <?php endif; ?>
 
         <?php //hillsborough_content_nav('nav-below'); ?>
 
