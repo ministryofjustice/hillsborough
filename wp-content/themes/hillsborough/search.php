@@ -7,7 +7,7 @@
 get_header();
 ?>
 <?php get_sidebar(); ?>
-<?php $s = $_GET['s']; ?>
+<?php $s = get_search_query(); ?>
 
 <section id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -18,59 +18,86 @@ get_header();
 
         <?php /* Start the Loop */ ?>
 
-        <h2>Hearings</h2>
+        <h2>Relevant Hearings</h2>
         <?php
         $hearings_results = new WP_Query(array(
             'post_type' => 'hearing',
             's' => $s,
-            'orderby' => 'meta_value',
-            'meta_key' => 'hearing_date'
         ));
+        if (function_exists('relevanssi_do_query')) {
+            relevanssi_do_query($hearings_results);
+        }
         ?>
         <?php if ($hearings_results->have_posts()) : ?>
-            <?php while ($hearings_results->have_posts()) : $hearings_results->the_post(); ?>                        
+            <?php //while ($hearings_results->have_posts()) : $hearings_results->the_post(); ?>
 
-                <?php get_template_part('content', 'search'); ?>
+                <?php //get_template_part('content', 'search'); ?>
 
-            <?php endwhile; ?>
+                <?php
+
+                // Check var for to see if month/year has changed
+                $cur_day = null;
+                // Toggle var for applying row highlight
+                $highlight = true;
+
+                // Generate list of hearings, broken down by date
+                while ($hearings_results->have_posts()) {
+                    $hearings_results->the_post();
+                    // Tracks if current hearing date has am/pm sessions
+                    $hearing_am = $hearing_pm = false;
+                    if (isset($hearings_results->posts[$hearings_results->current_post + 1])) {
+                        $next_post = $hearings_results->posts[ $hearings_results->current_post + 1];
+                    } else {
+                        $next_post = false;
+                    }
+
+                    $session = get_post_meta($post->ID, "hearing_session", true);
+                    ${"hearing_$session"} = get_permalink($post->ID);
+                    if ($next_post && get_post_meta($post->ID, 'hearing_date', true) == get_post_meta($next_post->ID, 'hearing_date', true)) {
+                        $session = get_post_meta($next_post->ID, "hearing_session", true);
+                        ${"hearing_$session"} = get_permalink($next_post->ID);
+                        ?>
+                        <div class='hearing-entry<?php echo ($highlight ? " shaded" : ""); ?>'>
+                            <span class='hearing-date'><?php echo date('l j F Y', strtotime(get_post_meta($post->ID, 'hearing_date', true))); ?></span>
+                            <span class='session-link'><a href="<?php echo $hearing_am; ?>">AM Session</a></span>
+                            <span class='session-link'><a href="<?php echo $hearing_pm; ?>">PM Session</a></span>
+                        </div>
+                        <?php
+                        $hearings_results->the_post();
+                    } else {
+                        ?>
+                        <div class='hearing-entry<?php echo ($highlight ? " shaded" : ""); ?>'>
+                            <span class='hearing-date'><?php echo date('l j F Y', strtotime(get_post_meta($post->ID, 'hearing_date', true))); ?></span>
+                            <span class='session-link'><?php if ($hearing_am) { ?><a href="<?php echo $hearing_am; ?>">AM Session</a><?php } else { ?>–<?php } ?></span>
+                            <span class='session-link'><?php if ($hearing_pm) { ?><a href="<?php echo $hearing_pm; ?>">PM Session</a><?php } else { ?>–<?php } ?></span>
+                        </div>
+                        <?php
+                    }
+
+                    $highlight = !$highlight;
+                }
+                ?>
+
+            <?php //endwhile; ?>
         <?php else: ?>
             <p class='no-results'>No matching hearings found.</p>
         <?php endif; ?>
 
 
-        <h2>Evidence</h2>
+        <h2>Relevant Evidence</h2>
         <?php
-        $evidence_results = new WP_Query(array(
+
+        query_posts(array(
             'post_type' => 'evidence',
             's' => $s
         ));
+        if (function_exists('relevanssi_do_query')) {
+            relevanssi_do_query($wp_query);
+        }
+        get_template_part('list-evidence');
+        wp_reset_query();
+
         ?>
-        <?php if ($evidence_results->have_posts()) : ?>
-            <?php while ($evidence_results->have_posts()) : $evidence_results->the_post(); ?>                        
-
-                <?php get_template_part('content', 'search'); ?>
-
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p class='no-results'>No matching evidence found.</p>
-        <?php endif; ?>
-
-        <h2>Documents</h2>
-        <?php
-        $document_results = new WP_Query(array(
-            'post_type' => 'document',
-            's' => $s
-        ));
-        ?>
-        <?php if ($document_results->have_posts()) : ?>
-            <?php while ($document_results->have_posts()) : $document_results->the_post(); ?>                        
-
-                <?php get_template_part('content', 'search'); ?>
-
-            <?php endwhile; ?>       
-        <?php else: ?>
-            <p class='no-results'>No matching documents found.</p>
-        <?php endif; ?>
 
         <?php //hillsborough_content_nav('nav-below'); ?>
 
