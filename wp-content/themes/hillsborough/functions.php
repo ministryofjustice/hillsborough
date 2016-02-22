@@ -80,9 +80,9 @@ add_action('widgets_init', 'hillsborough_widgets_init');
  */
 function hillsborough_scripts() {
   wp_deregister_script('jquery');
-  wp_register_script('jquery', 'http://code.jquery.com/jquery-1.10.2.min.js');
+  wp_register_script('jquery', 'https://code.jquery.com/jquery-1.10.2.min.js');
 
-  wp_register_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
+  wp_register_style('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
   wp_register_style('hillsborough-jquery-ui', get_template_directory_uri() . '/css/jquery-ui.css');
 
   wp_enqueue_style('hillsborough-style', get_stylesheet_uri()); // Default underscores stylesheet
@@ -128,7 +128,7 @@ function enqueue_admin_jquery() {
   wp_enqueue_script('field-date-js', get_template_directory_uri() . '/js/field_date.js', array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker'), time(), true);
   //wp_enqueue_script('evidence-sort-js', get_template_directory_uri() . '/js/evidence-sort.js', array('jquery', 'jquery-ui-core', 'jquery-ui-sortable'), time(), true);
 
-  wp_register_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
+  wp_register_style('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
   wp_enqueue_style('jquery-ui');
 }
 
@@ -147,8 +147,8 @@ add_action('admin_enqueue_scripts', 'enqueue_admin_stylesheets');
 // add ie conditional html5 shim to header
 function add_ie_workarounds() {
   echo '<!--[if lt IE 9]>';
-  echo '<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>';
-  echo '<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>';
+  echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>';
+  echo '<script src="' . get_template_directory_uri() . '/js/IE8.js"></script>';
   echo '<![endif]-->';
 }
 
