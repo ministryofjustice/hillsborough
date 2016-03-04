@@ -146,7 +146,14 @@ get_header();
                         if (!empty($witness_meta["letter"])) {
                             $first_letter = strtoupper($witness_meta['letter']);
                         } else {
-                            $split = explode(" ", $witness->name);
+                            // Clean and split witness' name
+                            $name = $witness->name;
+                            $name = preg_replace('/\(.*?\)/', '', $name); // Remove anything in brackets
+                            $name = preg_replace('/ {2,}/', ' ', $name); // Collapse multiple spaces into one
+                            $name = trim($name); // Trim trailing whitespace
+                            $split = explode(" ", $name);
+
+                            // Get the first letter of the last word in the string
                             $first_letter = strtoupper(substr($split[count($split) - 1], 0, 1));
                         }
                         $letters[$first_letter] = true;
