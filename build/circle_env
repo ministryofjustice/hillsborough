@@ -1,0 +1,18 @@
+DB_NAME=wp_publishing_test
+DB_USER="ubuntu"
+DB_PASSWORD=""
+DB_HOST=localhost
+WP_ENV="test"
+WP_HOME="http://localhost"
+WP_SITEURL="http://localhost/wp"
+AUTH_KEY="<:7dri$-w-bc(1M=H?Xm5Oo$$Ga(@ITSB-)RR[*Cc8.R E-<eF,-yPo{aM19/Y7"
+SECURE_AUTH_KEY="-s+IAu|O]w0ySeH= Hc=G|[Pgr+zFq.X#&|{us3u%yY@cz]_jby1Cn+)6DL.F="
+LOGGED_IN_KEY="t)|uj(,yX#CKkw.#|Mm;:VnNNH$jc.,8%lm+eO=N!c1j&h|Imxs(Zu^G*:~]0+AI"
+NONCE_KEY="N|S$V(;{c^,^|ea=g-ivw;uMd>_Jj%SDfc4}(i&<^;(/(a))oB{gK2z#^]W_N~z*"
+AUTH_SALT="|u0x-pEvYTq[U.R4g4wdseo6 790tF07I/1 &nEl7|F~E/:Oi)5{U?J&xlq)T$"
+SECURE_AUTH_SALT="(]fE60-d-D]k%:.RkXHTDfD-=XZ%KR 2Wu^ZN|R|Hnd:0oo4}LxYTsZS>od#8{ "
+LOGGED_IN_SALT="sy%|)TabZ,|-;046;+Smc>JW~;~5A}Mv(v|.-XJSy.8(VqhY.Iafv_>7yuQHM~f"
+NONCE_SALT="5C@XK}%9TKH_U8(Vu@izg!8305Yq+p~IOlcx@bFpA9eTTw:>c-y#^PDNOVA}"
+AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+AWS_S3_BUCKET=$AWS_S3_BUCKET

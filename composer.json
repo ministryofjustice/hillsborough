@@ -1,0 +1,49 @@
+{
+  "name": "ollietreend/12-factor-wordpress-demo",
+  "type": "project",
+  "description": "Demo of a WordPress application which follows 12 Factor App principles.",
+  "homepage": "https://github.com/ollietreend/12-factor-wordpress-demo",
+  "authors": [
+    {
+      "name": "Ollie Treend",
+      "email": "ollie@treend.com",
+      "homepage": "https://github.com/ollietreend"
+    }
+  ],
+  "config": {
+    "preferred-install": "dist"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://wpackagist.org"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/ministryofjustice/wp-rewrite-media-to-s3"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/ministryofjustice/pp-security-composer"
+    }
+  ],
+  "require": {
+    "php": ">=5.5",
+    "composer/installers": "~1.0.12",
+    "vlucas/phpdotenv": "^2.0.1",
+    "johnpbloch/wordpress": "4.4.1",
+    "oscarotero/env": "^1.0",
+    "wpackagist-plugin/disable-wordpress-updates": "1.4.7",
+    "wpackagist-plugin/akismet": "3.1.6",
+    "ministryofjustice/wp-rewrite-media-to-s3": "0.1.*",
+    "ministryofjustice/pp-security": "*"
+  },
+  "extra": {
+    "installer-paths": {
+      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin", "wpackagist-plugin/disable-wordpress-updates"],
+      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
+      "web/app/themes/{$name}/": ["type:wordpress-theme"]
+    },
+    "wordpress-install-dir": "web/wp"
+  }
+}
