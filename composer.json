@@ -34,9 +34,11 @@
     "johnpbloch/wordpress": "4.4.1",
     "oscarotero/env": "^1.0",
     "wpackagist-plugin/disable-wordpress-updates": "1.4.7",
-    "wpackagist-plugin/akismet": "3.1.6",
     "ministryofjustice/wp-rewrite-media-to-s3": "0.1.*",
-    "ministryofjustice/pp-security": "*"
+    "ministryofjustice/pp-security": "*",
+    "wpackagist-plugin/google-analytics-dashboard-for-wp": "4.9.2",
+    "wpackagist-plugin/google-xml-sitemaps-v3-for-qtranslate": "3.4.1",
+    "wpackagist-plugin/sitemap": "4.3"
   },
   "extra": {
     "installer-paths": {

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad000112edff56fa76cb1dbecb29b25d",
-    "content-hash": "ac73bf1986014cef345715d83b5082ca",
+    "hash": "25e20caf2915ccccf8694e37685f32cc",
+    "content-hash": "08d264c67bd22703dec52307e9cfe14c",
     "packages": [
         {
             "name": "composer/installers",
@@ -322,26 +322,6 @@
             "time": "2015-12-29 15:10:30"
         },
         {
-            "name": "wpackagist-plugin/akismet",
-            "version": "3.1.6",
-            "source": {
-                "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/akismet/",
-                "reference": "tags/3.1.6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/akismet.3.1.6.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/akismet/"
-        },
-        {
             "name": "wpackagist-plugin/disable-wordpress-updates",
             "version": "1.4.7",
             "source": {
@@ -362,6 +342,46 @@
             "homepage": "https://wordpress.org/plugins/disable-wordpress-updates/"
         },
         {
+            "name": "wpackagist-plugin/google-analytics-dashboard-for-wp",
+            "version": "4.9.2",
+            "source": {
+                "type": "svn",
+                "url": "http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/",
+                "reference": "tags/4.9.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/google-analytics-dashboard-for-wp.4.9.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/google-analytics-dashboard-for-wp/"
+        },
+        {
+            "name": "wpackagist-plugin/google-xml-sitemaps-v3-for-qtranslate",
+            "version": "3.4.1",
+            "source": {
+                "type": "svn",
+                "url": "http://plugins.svn.wordpress.org/google-xml-sitemaps-v3-for-qtranslate/",
+                "reference": "tags/3.4.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/google-xml-sitemaps-v3-for-qtranslate.3.4.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/google-xml-sitemaps-v3-for-qtranslate/"
+        },
+        {
             "name": "wpackagist-plugin/limit-login-attempts",
             "version": "1.7.1",
             "source": {
@@ -380,6 +400,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/limit-login-attempts/"
+        },
+        {
+            "name": "wpackagist-plugin/sitemap",
+            "version": "4.3",
+            "source": {
+                "type": "svn",
+                "url": "http://plugins.svn.wordpress.org/sitemap/",
+                "reference": "tags/4.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/sitemap.4.3.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/sitemap/"
         },
         {
             "name": "wpackagist-plugin/stop-user-enumeration",
