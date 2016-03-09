@@ -1,8 +1,8 @@
 {
-  "name": "ollietreend/12-factor-wordpress-demo",
+  "name": "ministryofjustice/hillsborough",
   "type": "project",
-  "description": "Demo of a WordPress application which follows 12 Factor App principles.",
-  "homepage": "https://github.com/ollietreend/12-factor-wordpress-demo",
+  "description": "The Hillsborough Inquests website.",
+  "homepage": "https://github.com/ministryofjustice/hillsborough",
   "authors": [
     {
       "name": "Ollie Treend",

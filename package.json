@@ -1,7 +1,7 @@
 {
-  "name": "12-factor-wordpress-demo",
-  "version": "0.0.1",
-  "description": "Demo of a WordPress application which follows 12 Factor App principles.",
+  "name": "ministryofjustice/hillsborough",
+  "version": "1.2.2-publishing-platform",
+  "description": "The Hillsborough Inquests website.",
   "main": "",
   "directories": {
     "test": "tests"
