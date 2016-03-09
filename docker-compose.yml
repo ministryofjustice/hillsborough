@@ -2,17 +2,17 @@ wordpress:
   build: .
   ports:
     - 80:80
-  volumes:
-    - .:/wordpress
   environment:
-    URL: 'http://localhost'
+    SERVER_NAME: 192.168.99.100
+    URL: 'http://192.168.99.100'
     DB_USER: root
     DB_PASSWORD: ''
     DB_NAME: wp_publishing_test
     DB_HOST: mysql:3306
-    WP_ENV: test
-    WP_HOME: 'http://localhost'
-    WP_SITEURL: 'http://localhost/wp'
+    WP_ENV: development
+    WP_HOME: 'http://192.168.99.100'
+    WP_SITEURL: 'http://192.168.99.100/wp'
+    DISABLE_WP_CRON: true
     AUTH_KEY: "sde34£%34df@@*%566dfgrgerttrertwerkvcx;blkrtlkweroeowerryPo"
     SECURE_AUTH_KEY: '-s+IAu|O]w0ySeH= Hc=G|[Pgr+zFq.X#&|{us3u%yY@cz]_jby1Cn+)6DL.F='
     LOGGED_IN_KEY: 't)|uj(,yX#CKkw.#|Mm;:VnNNH*jc.,8%lm+eO=N!c1j&h|Imxs(Zu^G*:~]0+AI'
@@ -26,6 +26,7 @@ wordpress:
     AWS_S3_BUCKET: ${AWS_S3_BUCKET}
   links:
     - mysql
+  privileged: true
 mysql:
   image: orchardup/mysql
   environment:

@@ -70,7 +70,7 @@ define('NONCE_SALT', env('NONCE_SALT'));
 define('AUTOMATIC_UPDATER_DISABLED', true);
 define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 define('DISALLOW_FILE_EDIT', true);
-define('WP_DEFAULT_THEME', 'twelve');
+define('WP_DEFAULT_THEME', 'hillsborough');
 define('S3_UPLOADS_BASE_URL', env('S3_UPLOADS_BASE_URL'));
 
 /**
