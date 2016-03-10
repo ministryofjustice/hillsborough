@@ -1,16 +1,20 @@
-wordpress:
-  build: .
-  ports:
-    - 80:80
-  env_file: .env
-  privileged: true
-  environment:
-    DISABLE_WP_CRON: "true"
-    SMTP_HOST: mailcatcher
-    SMTP_PORT: 1025
-  links:
-    - mailcatcher
-mailcatcher:
+version: '2'
+services:
+  wordpress:
+    build: .
+    volumes:
+      - .:/bedrock
+    ports:
+      - 80:80
+    env_file: .env
+    privileged: true
+    environment:
+      DISABLE_WP_CRON: "true"
+      SMTP_HOST: mailcatcher
+      SMTP_PORT: 1025
+    links:
+      - mailcatcher
+  mailcatcher:
     image: schickling/mailcatcher
     ports:
       - 1080:1080
