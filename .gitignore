@@ -19,6 +19,10 @@ sql-dump-*.sql
 .env.*
 !.env.example
 
+# VPN
+*.ovpn
+
+
 # Vendor (e.g. Composer)
 vendor/*
 !vendor/.gitkeep
@@ -28,4 +32,3 @@ node_modules
 
 # PhpStorm IDE
 .idea
-
