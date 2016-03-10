@@ -2,38 +2,14 @@ wordpress:
   build: .
   ports:
     - 80:80
-  volumes:
-    - .:/wordpress
   env_file: .env
   privileged: true
   environment:
-    URL: ${WP_HOME}
-    DB_USER: ${DB_USER}
-    DB_NAME: ${DB_NAME}
-    DB_PASSWORD: ${DB_PASSWORD}
-    DB_NAME: ${DB_NAME}
-    DB_HOST: ${DB_HOST}
-    WP_ENV: production
-    WP_HOME: ${WP_HOME}
-    WP_SITEURL: ${WP_SITEURL}
-    AUTH_KEY: ${AUTH_KEY}
-    SECURE_AUTH_KEY: ${SECURE_AUTH_KEY}
-    LOGGED_IN_KEY: ${LOGGED_IN_KEY}
-    NONCE_KEY: ${NONCE_KEY}
-    AUTH_SALT: ${AUTH_SALT}
-    SECURE_AUTH_SALT: ${SECURE_AUTH_SALT}
-    LOGGED_IN_SALT: ${LOGGED_IN_SALT}
-    NONCE_SALT: ${NONCE_SALT}
-    AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-    AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-    AWS_S3_BUCKET: ${AWS_S3_BUCKET}
-    DISABLE_WP_CRON: true
-    SERVER_NAME: ${SERVER_NAME}
-    WHITELIST_IPS: ${WHITELIST_IPS}
+    DISABLE_WP_CRON: "true"
     SMTP_HOST: mailcatcher
     SMTP_PORT: 1025
-    link:
-      - mailcatcher
+  links:
+    - mailcatcher
 mailcatcher:
     image: schickling/mailcatcher
     ports:
