@@ -5,7 +5,7 @@ internet-lb:
   ports:
     - 80:80
     - 443:443
-wordpress:
+hillsborough-wp:
   name: hillsborough
   instances: 2
   stateful: true
@@ -68,7 +68,7 @@ wordpress:
     - secret: HB_LOGGED_IN_SALT
       name: LOGGED_IN_SALT
       type: env
-    - secet: HB_NONCE_SALT
+    - secret: HB_NONCE_SALT
       name: NONCE_SALT
       type: env
     - secret: HB_WHITELIST_IPS
