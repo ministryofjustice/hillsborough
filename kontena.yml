@@ -5,39 +5,34 @@ internet-lb:
   ports:
     - 80:80
     - 443:443
-wordpress2:
-  name: wordpress2
+wordpress:
+  name: hillsborough
   instances: 2
   stateful: true
-  image: mojdigital/12-factor-wordpress-demo:latest
+  image: mojdigital/hillsborough:latest
   privileged: true
-  volumes:
-    - .:/wordpress
   links:
     - internet-lb
   secrets:
-    - secret: TEST_SERVER_NAME
+    - secret: HB_SERVER_NAME
       name: SERVER_NAME
       type: env
-    - secret: TEST_URL
-      name: URL
-      type: env
-    - secret: TEST_DB_USER
+    - secret: HB_DB_USER
       name: DB_USER
       type: env
-    - secret: TEST_DB_PASSWORD
+    - secret: HB_DB_PASSWORD
       name: DB_PASSWORD
       type: env
-    - secret: TEST_DB_NAME
+    - secret: HB_DB_NAME
       name: DB_NAME
       type: env
-    - secret: TEST_DB_HOST
+    - secret: HB_DB_HOST
       name: DB_HOST
       type: env
-    - secret: TEST_WP_HOME
+    - secret: HB_WP_HOME
       name: WP_HOME
       type: env
-    - secret: TEST_WP_SITEURL
+    - secret: HB_WP_SITEURL
       name: WP_SITEURL
       type: env
     - secret: AWS_ACCESS_KEY_ID
@@ -46,47 +41,53 @@ wordpress2:
     - secret: AWS_SECRET_ACCESS_KEY
       name: AWS_SECRET_ACCESS_KEY
       type: env
-    - secret: TEST_AWS_S3_BUCKET
+    - secret: HB_AWS_S3_BUCKET
       name: AWS_S3_BUCKET
       type: env
-    - secet: TEST_TEST_AUTH_KEY
+    - secret: HN_S3_UPLOADS_BASE_URL
+      name: S3_UPLOADS_BASE_URL
+      type: env
+    - secret: HB_AUTH_KEY
       name: AUTH_KEY
       type: env
-    - secret: TEST_SECURE_AUTH_KEY
+    - secret: HB_SECURE_AUTH_KEY
       name: SECURE_AUTH_KEY
       type: env
-    - secret: TEST_LOGGED_IN_KEY
+    - secret: HB_LOGGED_IN_KEY
       name: LOGGED_IN_KEY
       type: env
-    - secret: TEST_NONCE_KEY
+    - secret: HB_NONCE_KEY
       name: NONCE_KEY
       type: env
-    - secret: TEST_AUTH_SALT
+    - secret: HB_AUTH_SALT
       name: AUTH_SALT
       type: env
-    - secret: TEST_SECURE_AUTH_SALT
+    - secret: HB_SECURE_AUTH_SALT
       name: SECURE_AUTH_SALT
       type: env
-    - secret: TEST_LOGGED_IN_SALT
+    - secret: HB_LOGGED_IN_SALT
       name: LOGGED_IN_SALT
       type: env
-    - secet: TEST_NONCE_SALT
+    - secet: HB_NONCE_SALT
       name: NONCE_SALT
       type: env
-    - secret: TEST_WHITELIST_IPS
+    - secret: HB_WHITELIST_IPS
       name: WHITELIST_IPS
       type: env
-    - secret: TEST_SMTP_HOST
+    - secret: HB_SMTP_HOST
       name: SMTP_HOST
       type: env
-    - secret: TEST_SMTP_PORT
+    - secret: HB_SMTP_PORT
       name: SMTP_PORT
       type: env
-    - secret: TEST_SMTP_USER
+    - secret: HB_SMTP_USER
       name: SMTP_USER
       type: env
-    - secret: TEST_SMTP_PASS
+    - secret: HB_SMTP_PASS
       name: SMTP_PASS
+      type: env
+    - secret: HB_WHITELIST_IPS
+      name: WHITELIST_IPS
       type: env
   environment:
     - KONTENA_LB_MODE=http
