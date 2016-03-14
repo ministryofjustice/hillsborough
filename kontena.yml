@@ -1,18 +1,29 @@
 ---
-internet-lb:
+lb:
   image: kontena/lb:latest
-  instances: 2
   ports:
     - 80:80
     - 443:443
-hillsborough-wp:
-  name: hillsborough
   instances: 2
-  stateful: true
+wp:
   image: mojdigital/hillsborough:latest
+  stateful: true
+  deploy:
+    strategy: ha
+    wait_for_port: 80
   privileged: true
+  instances: 2
   links:
-    - internet-lb
+    - lb
+  environment:
+    - KONTENA_LB_MODE=http
+    - KONTENA_LB_BALANCE=source
+    - KONTENA_LB_INTERNAL_PORT=80
+    - KONTENA_LB_VIRTUAL_HOSTS=hillsborough.pub.dsd.io
+    - WP_ENV=production
+    - DISABLE_WP_CRON=true
+    - SMTP_USE_STARTTLS=true
+    - SMTP_USE_SSL=false
   secrets:
     - secret: HB_SERVER_NAME
       name: SERVER_NAME
@@ -89,11 +100,3 @@ hillsborough-wp:
     - secret: HB_WHITELIST_IPS
       name: WHITELIST_IPS
       type: env
-  environment:
-    - KONTENA_LB_MODE=http
-    - KONTENA_LB_BALANCE=source
-    - KONTENA_LB_INTERNAL_PORT=80
-    - WP_ENV=production
-    - DISABLE_WP_CRON=true
-    - SMTP_USE_STARTTLS=true
-    - SMTP_USE_SSL=false
