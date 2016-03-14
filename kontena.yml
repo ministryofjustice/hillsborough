@@ -1,23 +1,24 @@
----
 lb:
   image: kontena/lb:latest
   ports:
     - 80:80
-    - 443:443
+  #   - 443:80
+  # secrets:
+  #   - secret: HB_CERT
+  #     name: SSL_CERTS
+  #     type: env
   instances: 2
 wp:
+  build: "."
   image: mojdigital/hillsborough:latest
   stateful: true
-  deploy:
-    strategy: ha
-    wait_for_port: 80
   privileged: true
   instances: 2
   links:
     - lb
   environment:
-    - KONTENA_LB_MODE=http
-    - KONTENA_LB_BALANCE=source
+    # - KONTENA_LB_MODE=http
+    # - KONTENA_LB_BALANCE=source
     - KONTENA_LB_INTERNAL_PORT=80
     - KONTENA_LB_VIRTUAL_HOSTS=hillsborough.pub.dsd.io
     - WP_ENV=production
