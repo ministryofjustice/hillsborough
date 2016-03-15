@@ -2,18 +2,18 @@ lb:
   image: kontena/lb:latest
   ports:
     - 80:80
-  #   - 443:80
-  # secrets:
-  #   - secret: HB_CERT
-  #     name: SSL_CERTS
-  #     type: env
+    - 443:443
+  secrets:
+    - secret: HB_CERT
+      name: SSL_CERTS
+      type: env
   instances: 2
 wp:
   build: "."
   image: mojdigital/hillsborough:latest
   stateful: true
   privileged: true
-  instances: 2
+  instances: 3
   links:
     - lb
   environment:
