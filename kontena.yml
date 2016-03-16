@@ -26,6 +26,9 @@ wp:
     - SMTP_USE_STARTTLS=true
     - SMTP_USE_SSL=false
   secrets:
+    - secret: HB_LB_IP_RANGE
+      name: LB_IP_RANGE
+      type: env
     - secret: HB_SERVER_NAME
       name: SERVER_NAME
       type: env
