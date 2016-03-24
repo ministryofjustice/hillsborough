@@ -59,8 +59,14 @@ wp:
     - secret: HB_AWS_S3_BUCKET
       name: AWS_S3_BUCKET
       type: env
-    - secret: HN_S3_UPLOADS_BASE_URL
+    - secret: HB_S3_UPLOADS_BASE_URL
       name: S3_UPLOADS_BASE_URL
+      type: env
+    - secret: HB_SNS_TOPIC
+      name: SNS_TOPIC
+      type: env
+    - secret: HB_SQS_QUEUE
+      name: SQS_QUEUE
       type: env
     - secret: HB_AUTH_KEY
       name: AUTH_KEY
