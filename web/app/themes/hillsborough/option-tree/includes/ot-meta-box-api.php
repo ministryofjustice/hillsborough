@@ -30,13 +30,21 @@ if ( ! class_exists( 'OT_Meta_Box' ) ) {
     function __construct( $meta_box ) {
       if ( ! is_admin() )
         return;
-        
+
+      global $ot_meta_boxes;
+
+      if ( ! isset( $ot_meta_boxes ) ) {
+        $ot_meta_boxes = array();
+      }
+
+      $ot_meta_boxes[] = $meta_box;
+
       $this->meta_box = $meta_box;
-      
+
       add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-      
+
       add_action( 'save_post', array( $this, 'save_meta_box' ), 1, 2 );
-      
+
     }
     
     /**
@@ -64,9 +72,9 @@ if ( ! class_exists( 'OT_Meta_Box' ) ) {
      * @since     1.0
      */
     function build_meta_box( $post, $metabox ) {
-      
+
       echo '<div class="ot-metabox-wrapper">';
-           
+
         /* Use nonce for verification */
         echo '<input type="hidden" name="' . $this->meta_box['id'] . '_nonce" value="' . wp_create_nonce( $this->meta_box['id'] ) . '" />';
         
@@ -97,32 +105,69 @@ if ( ! class_exists( 'OT_Meta_Box' ) ) {
             'field_taxonomy'    => isset( $field['taxonomy'] ) && ! empty( $field['taxonomy'] ) ? $field['taxonomy'] : 'category',
             'field_min_max_step'=> isset( $field['min_max_step'] ) && ! empty( $field['min_max_step'] ) ? $field['min_max_step'] : '0,100,1',
             'field_class'       => isset( $field['class'] ) ? $field['class'] : '',
+            'field_condition'   => isset( $field['condition'] ) ? $field['condition'] : '',
+            'field_operator'    => isset( $field['operator'] ) ? $field['operator'] : 'and',
             'field_choices'     => isset( $field['choices'] ) ? $field['choices'] : array(),
             'field_settings'    => isset( $field['settings'] ) && ! empty( $field['settings'] ) ? $field['settings'] : array(),
             'post_id'           => $post->ID,
             'meta'              => true
           );
           
+          $conditions = '';
+          
+          /* setup the conditions */
+          if ( isset( $field['condition'] ) && ! empty( $field['condition'] ) ) {
+  
+            $conditions = ' data-condition="' . $field['condition'] . '"';
+            $conditions.= isset( $field['operator'] ) && in_array( $field['operator'], array( 'and', 'AND', 'or', 'OR' ) ) ? ' data-operator="' . $field['operator'] . '"' : '';
+  
+          }
+          
           /* only allow simple textarea due to DOM issues with wp_editor() */
-          if ( $_args['type'] == 'textarea' )
+          if ( apply_filters( 'ot_override_forced_textarea_simple', false, $field['id'] ) == false && $_args['type'] == 'textarea' )
             $_args['type'] = 'textarea-simple';
+
+          // Build the setting CSS class
+          if ( ! empty( $_args['field_class'] ) ) {
+            
+            $classes = explode( ' ', $_args['field_class'] );
+
+            foreach( $classes as $key => $value ) {
+            
+              $classes[$key] = $value . '-wrap';
+              
+            }
+
+            $class = 'format-settings ' . implode( ' ', $classes );
+            
+          } else {
+          
+            $class = 'format-settings';
+            
+          }
           
           /* option label */
-          echo '<div class="format-settings">';
+          echo '<div id="setting_' . $field['id'] . '" class="' . $class . '"' . $conditions . '>';
             
-            /* don't show title with textblocks */
-            if ( $_args['type'] != 'textblock' && ! empty( $field['label'] ) ) {
-              echo '<div class="format-setting-label">';
-                echo '<label for="' . $_args['field_id'] . '" class="label">' . $field['label'] . '</label>';
-              echo '</div>';
-            }
+            echo '<div class="format-setting-wrap">';
+            
+              /* don't show title with textblocks */
+              if ( $_args['type'] != 'textblock' && ! empty( $field['label'] ) ) {
+                echo '<div class="format-setting-label">';
+                  echo '<label for="' . $field['id'] . '" class="label">' . $field['label'] . '</label>';
+                echo '</div>';
+              }
       
-            /* get the option HTML */
-            echo ot_display_by_type( $_args );
+              /* get the option HTML */
+              echo ot_display_by_type( $_args );
+              
+            echo '</div>';
             
           echo '</div>';
           
         }
+
+        echo '<div class="clear"></div>';
       
       echo '</div>';
 
@@ -140,7 +185,7 @@ if ( ! class_exists( 'OT_Meta_Box' ) ) {
       global $pagenow;
 
       /* don't save if $_POST is empty */
-      if ( empty( $_POST ) )
+      if ( empty( $_POST ) || ( isset( $_POST['vc_inline'] ) && $_POST['vc_inline'] == true ) )
         return $post_id;
       
       /* don't save during quick edit */
@@ -224,6 +269,34 @@ if ( ! class_exists( 'OT_Meta_Box' ) ) {
             
             /* set up new data with validated data */
             $new = $_POST[$field['id']];
+          
+          } else if ( $field['type'] == 'social-links' ) {
+            
+            /* get the settings array */
+            $settings = isset( $_POST[$field['id'] . '_settings_array'] ) ? unserialize( ot_decode( $_POST[$field['id'] . '_settings_array'] ) ) : array();
+            
+            /* settings are empty get the defaults */
+            if ( empty( $settings ) ) {
+              $settings = ot_social_links_settings( $field['id'] );
+            }
+            
+            foreach( $_POST[$field['id']] as $k => $setting_array ) {
+  
+              foreach( $settings as $sub_setting ) {
+                
+                /* verify sub setting has a type & value */
+                if ( isset( $sub_setting['type'] ) && isset( $_POST[$field['id']][$k][$sub_setting['id']] ) ) {
+                  
+                  $_POST[$field['id']][$k][$sub_setting['id']] = ot_validate_setting( $_POST[$field['id']][$k][$sub_setting['id']], $sub_setting['type'], $sub_setting['id'] );
+                  
+                }
+                
+              }
+            
+            }
+            
+            /* set up new data with validated data */
+            $new = $_POST[$field['id']];
 
           } else {
             
@@ -251,7 +324,7 @@ if ( ! class_exists( 'OT_Meta_Box' ) ) {
         
         }
         
-        if ( $new && $new !== $old ) {
+        if ( isset( $new ) && $new !== $old ) {
           update_post_meta( $post_id, $field['id'], $new );
         } else if ( '' == $new && $old ) {
           delete_post_meta( $post_id, $field['id'], $old );
