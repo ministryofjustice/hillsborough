@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25e20caf2915ccccf8694e37685f32cc",
-    "content-hash": "08d264c67bd22703dec52307e9cfe14c",
+    "hash": "e4de391ac0b08dc035213058068c7ce8",
+    "content-hash": "6cbcc574391cff499395ee3b96a8717d",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.0.23",
+            "version": "v1.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "6213d900e92647831f7a406d5c530ea1f3d4360e"
+                "reference": "36e5b5843203d7f1cf6ffb0305a97e014387bd8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/6213d900e92647831f7a406d5c530ea1f3d4360e",
-                "reference": "6213d900e92647831f7a406d5c530ea1f3d4360e",
+                "url": "https://api.github.com/repos/composer/installers/zipball/36e5b5843203d7f1cf6ffb0305a97e014387bd8e",
+                "reference": "36e5b5843203d7f1cf6ffb0305a97e014387bd8e",
                 "shasum": ""
             },
             "require": {
@@ -40,8 +40,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Composer\\Installers\\": "src/"
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -56,12 +56,14 @@
                 }
             ],
             "description": "A multi-framework Composer library installer",
-            "homepage": "http://composer.github.com/installers/",
+            "homepage": "https://composer.github.io/installers/",
             "keywords": [
                 "Craft",
                 "Dolibarr",
                 "Hurad",
+                "ImageCMS",
                 "MODX Evo",
+                "Mautic",
                 "OXID",
                 "SMF",
                 "Thelia",
@@ -103,20 +105,20 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2016-01-27 12:54:22"
+            "time": "2016-04-13 19:46:30"
         },
         {
             "name": "johnpbloch/wordpress",
-            "version": "4.4.1",
+            "version": "4.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress.git",
-                "reference": "85d6a8c16c7e8bb369e7530d3676d16618f68e24"
+                "reference": "aca8da84b4a699b16b8bcc96d2bc794a4c7b5ae3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/85d6a8c16c7e8bb369e7530d3676d16618f68e24",
-                "reference": "85d6a8c16c7e8bb369e7530d3676d16618f68e24",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/aca8da84b4a699b16b8bcc96d2bc794a4c7b5ae3",
+                "reference": "aca8da84b4a699b16b8bcc96d2bc794a4c7b5ae3",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +142,7 @@
                 "blog",
                 "cms"
             ],
-            "time": "2016-01-06 18:46:15"
+            "time": "2016-09-07 15:01:47"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -230,16 +232,16 @@
         },
         {
             "name": "oscarotero/env",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/oscarotero/env.git",
-                "reference": "8836fc53726466fea17137c2f2622d89de51cd67"
+                "reference": "0819fd764ca19ab880b8d9ed7a95ae4910f98f20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oscarotero/env/zipball/8836fc53726466fea17137c2f2622d89de51cd67",
-                "reference": "8836fc53726466fea17137c2f2622d89de51cd67",
+                "url": "https://api.github.com/repos/oscarotero/env/zipball/0819fd764ca19ab880b8d9ed7a95ae4910f98f20",
+                "reference": "0819fd764ca19ab880b8d9ed7a95ae4910f98f20",
                 "shasum": ""
             },
             "require": {
@@ -268,32 +270,32 @@
             "keywords": [
                 "env"
             ],
-            "time": "2015-12-31 12:34:29"
+            "time": "2016-05-08 17:14:32"
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v2.2.0",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "9caf304153dc2288e4970caec6f1f3b3bc205412"
+                "reference": "3cc116adbe4b11be5ec557bf1d24dc5e3a21d18c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/9caf304153dc2288e4970caec6f1f3b3bc205412",
-                "reference": "9caf304153dc2288e4970caec6f1f3b3bc205412",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/3cc116adbe4b11be5ec557bf1d24dc5e3a21d18c",
+                "reference": "3cc116adbe4b11be5ec557bf1d24dc5e3a21d18c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8|^5.0"
+                "phpunit/phpunit": "^4.8 || ^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -303,7 +305,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD"
+                "BSD-3-Clause-Attribution"
             ],
             "authors": [
                 {
@@ -313,20 +315,19 @@
                 }
             ],
             "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
-            "homepage": "http://github.com/vlucas/phpdotenv",
             "keywords": [
                 "dotenv",
                 "env",
                 "environment"
             ],
-            "time": "2015-12-29 15:10:30"
+            "time": "2016-09-01 10:05:43"
         },
         {
             "name": "wpackagist-plugin/disable-wordpress-updates",
             "version": "1.4.7",
             "source": {
                 "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/disable-wordpress-updates/",
+                "url": "https://plugins.svn.wordpress.org/disable-wordpress-updates/",
                 "reference": "tags/1.4.7"
             },
             "dist": {
@@ -343,15 +344,15 @@
         },
         {
             "name": "wpackagist-plugin/google-analytics-dashboard-for-wp",
-            "version": "4.9.2",
+            "version": "4.9.3.2",
             "source": {
                 "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/",
-                "reference": "tags/4.9.2"
+                "url": "https://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/",
+                "reference": "tags/4.9.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/google-analytics-dashboard-for-wp.4.9.2.zip",
+                "url": "https://downloads.wordpress.org/plugin/google-analytics-dashboard-for-wp.4.9.3.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -366,7 +367,7 @@
             "version": "3.4.1",
             "source": {
                 "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/google-xml-sitemaps-v3-for-qtranslate/",
+                "url": "https://plugins.svn.wordpress.org/google-xml-sitemaps-v3-for-qtranslate/",
                 "reference": "tags/3.4.1"
             },
             "dist": {
@@ -386,7 +387,7 @@
             "version": "1.7.1",
             "source": {
                 "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/limit-login-attempts/",
+                "url": "https://plugins.svn.wordpress.org/limit-login-attempts/",
                 "reference": "tags/1.7.1"
             },
             "dist": {
@@ -406,7 +407,7 @@
             "version": "4.3",
             "source": {
                 "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/sitemap/",
+                "url": "https://plugins.svn.wordpress.org/sitemap/",
                 "reference": "tags/4.3"
             },
             "dist": {
@@ -426,7 +427,7 @@
             "version": "1.3.3",
             "source": {
                 "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/stop-user-enumeration/",
+                "url": "https://plugins.svn.wordpress.org/stop-user-enumeration/",
                 "reference": "tags/1.3.3"
             },
             "dist": {
@@ -446,7 +447,7 @@
             "version": "1.0.1",
             "source": {
                 "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/wp-bcrypt/",
+                "url": "https://plugins.svn.wordpress.org/wp-bcrypt/",
                 "reference": "tags/1.0.1"
             },
             "dist": {

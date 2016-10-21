@@ -16,7 +16,7 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "http://wpackagist.org"
+      "url": "https://wpackagist.org"
     },
     {
       "type": "git",
@@ -31,14 +31,14 @@
     "php": ">=5.5",
     "composer/installers": "~1.0.12",
     "vlucas/phpdotenv": "^2.0.1",
-    "johnpbloch/wordpress": "4.4.1",
+    "johnpbloch/wordpress": "4.6.*",
     "oscarotero/env": "^1.0",
-    "wpackagist-plugin/disable-wordpress-updates": "1.4.7",
+    "wpackagist-plugin/disable-wordpress-updates": "*",
     "ministryofjustice/wp-rewrite-media-to-s3": "0.1.*",
     "ministryofjustice/pp-security": "*",
-    "wpackagist-plugin/google-analytics-dashboard-for-wp": "4.9.2",
-    "wpackagist-plugin/google-xml-sitemaps-v3-for-qtranslate": "3.4.1",
-    "wpackagist-plugin/sitemap": "4.3"
+    "wpackagist-plugin/google-analytics-dashboard-for-wp": "*",
+    "wpackagist-plugin/google-xml-sitemaps-v3-for-qtranslate": "*",
+    "wpackagist-plugin/sitemap": "*"
   },
   "extra": {
     "installer-paths": {
